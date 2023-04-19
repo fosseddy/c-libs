@@ -2,12 +2,12 @@
 
 set -e
 
-name="$1"
-cwd="/home/fosseddy/programming/c-sandbox/"
+NAME="$1"
+CWD="$HOME/programming/c-libs"
 
-if [ "$name" = "mem" ]; then
-    gcc -c -o $cwd/mem/mem.o $cwd/mem/mem.c
-    ar rcs $cwd/lib/libmem.a $cwd/mem/mem.o
-    rm $cwd/mem/mem.o
-    cp $cwd/mem/mem.h $cwd/include
+if [ "$NAME" = "mem" ]; then
+    gcc -c -o $CWD/mem/mem.o $CWD/mem/mem.c
+    ar rcs $CWD/lib/libartmem.a $CWD/mem/mem.o
+    rm $CWD/mem/mem.o
+    cp $CWD/mem/mem.h $CWD/include/artmem.h
 fi
