@@ -2,12 +2,14 @@
 
 set -e
 
-NAME="$1"
-CWD="$HOME/programming/c-libs"
+flags="-Werror=declaration-after-statement -Wall -Wextra -pedantic -std=c99"
 
-if [ "$NAME" = "mem" ]; then
-    gcc -c -o $CWD/mem/mem.o $CWD/mem/mem.c
-    ar rcs $CWD/lib/libartmem.a $CWD/mem/mem.o
-    rm $CWD/mem/mem.o
-    cp $CWD/mem/mem.h $CWD/include/artmem.h
+name=$1
+cwd="$HOME/programming/c-libs"
+
+if [[ $name = "mem" ]]; then
+    gcc $flags -c -o $cwd/mem/mem.o $cwd/mem/mem.c
+    ar rcs $cwd/lib/libartmem.a $cwd/mem/mem.o
+    rm $cwd/mem/mem.o
+    cp $cwd/mem/mem.h $cwd/include/artmem.h
 fi
