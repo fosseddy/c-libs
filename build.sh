@@ -12,4 +12,8 @@ if [[ $name = "mem" ]]; then
     ar rcs $cwd/lib/libartmem.a $cwd/mem/mem.o
     rm $cwd/mem/mem.o
     cp $cwd/mem/mem.h $cwd/include/artmem.h
+
+    exit 0
 fi
+
+echo "unknown lib name $name"

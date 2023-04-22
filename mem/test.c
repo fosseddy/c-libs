@@ -14,8 +14,8 @@ static void test_init()
 {
     struct intarr arr, arr2;
 
-    meminit((mem_t *) &arr, sizeof(int), 0);
-    meminit((mem_t *) &arr2, sizeof(int), 32);
+    meminit(&arr, sizeof(int), 0);
+    meminit(&arr2, sizeof(int), 32);
 
     assert(arr.cap > 0);
     assert(arr2.cap == 32);
@@ -25,10 +25,10 @@ static void test_memgrow()
 {
     struct intarr arr;
 
-    meminit((mem_t *) &arr, sizeof(int), 0);
+    meminit(&arr, sizeof(int), 0);
 
     for (int i = 0; i < 15; ++i) {
-        memgrow((mem_t *) &arr);
+        memgrow(&arr);
         arr.buf[arr.len++] = i;
     }
 
@@ -39,7 +39,7 @@ static void test_memgrow()
     }
 
     arr.len += 15;
-    memgrow((mem_t *) &arr);
+    memgrow(&arr);
     assert(arr.cap > arr.len);
 }
 
@@ -47,10 +47,10 @@ static void test_memnext()
 {
     struct intarr arr;
 
-    meminit((mem_t *) &arr, sizeof(int), 0);
+    meminit(&arr, sizeof(int), 0);
 
     for (int i = 0; i < 15; ++i) {
-        int *val = memnext((mem_t *) &arr);
+        int *val = memnext(&arr);
         *val = i;
     }
 

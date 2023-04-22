@@ -3,10 +3,19 @@
 
 #include "mem.h"
 
+struct mem {
+    int len;
+    int cap;
+    int data_size;
+    void *buf;
+};
+
 enum { INIT_CAP = 8 };
 
-void meminit(mem_t *m, int data_size, int cap)
+void meminit(void *mem, int data_size, int cap)
 {
+    struct mem *m = mem;
+
     if (cap == 0) {
         cap = INIT_CAP;
     }
@@ -22,8 +31,10 @@ void meminit(mem_t *m, int data_size, int cap)
     }
 }
 
-void memgrow(mem_t *m)
+void memgrow(void *mem)
 {
+    struct mem *m = mem;
+
     if (m->len >= m->cap) {
         m->cap = m->len * 2;
         m->buf = realloc(m->buf, m->cap * m->data_size);
@@ -34,8 +45,9 @@ void memgrow(mem_t *m)
     }
 }
 
-void *memnext(mem_t *m)
+void *memnext(void *mem)
 {
+    struct mem *m = mem;
     void *slot;
 
     memgrow(m);
@@ -46,7 +58,9 @@ void *memnext(mem_t *m)
     return slot;
 }
 
-void memfree(mem_t *m)
+void memfree(void *mem)
 {
+    struct mem *m = mem;
+
     free(m->buf);
 }
